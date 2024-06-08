@@ -8,12 +8,28 @@ import os
 import sqlite3
 import getpass
 import json
+
+#-------------------Prequisit Installer-------------------#
+
+requiredmodules = {'pypiwin32','requests'}
+
+def pipinstall(package):
+   subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+for x in requiredmodules:
+   try:
+      import x
+
+      print("\033[2J\033[H", end="", flush=True)
+   except ImportError:
+      pipinstall(x)
+
+#------------------------------------INSTALLED IMPORTS------------------------------------#
+
 import win32crypt
 import requests
 
 #------------------------------------VALUES------------------------------------#
-
-requiredmodules = {'pypiwin32','requests'}
 
 urltocheckwifi = "https://www.google.com/"
 
@@ -109,12 +125,6 @@ def pyloggy():
    print("[?] wip [?]")
    input("Press Enter to return to start")
    show_selection()
-
-#-------------------Pip Installer-------------------#
-
-def pipinstall(package):
-   subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
 
 #-------------------Internet checker-------------------#
 def check_internet_connection():
